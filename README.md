@@ -5,3 +5,7 @@
 Uses two gems:
 * Chatterbot - A really cool Ruby based Twitter Bot framework, used to tweet images
 * static_map - An equally as cool gem that uses Google's Static Map API to generate static aerial images
+
+# Future Work
+* Oceans cover 71% of the Earth's surface. Unfortunately, pictures of water don't look cool. I need to restrict @random_map from calculating latitude & longitude of oceans.
+* In order to trigger the event to send a tweet, Chatterbot searches latest tweets on Twitter for the 'a' character. If it finds a tweet containing the letter 'a' (why wouldn't it?), it tweets a new aerial picture. Pretty dumb, right? Must change this.
