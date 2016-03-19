@@ -16,7 +16,7 @@ size: '640x640',
 sensor: false,
 center: "#{lat.to_s} #{long.to_s}",
 maptype: 'satellite',
-zoom: 9,
+zoom: 10,
 title: 'A map',
 alt: 'Alt text for img html',
 path: './map.png'
