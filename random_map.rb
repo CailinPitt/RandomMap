@@ -7,7 +7,7 @@ require 'static_map'
 # remove this to get less output when running your bot
 verbose
   
-continent = rand(0..6)
+continent = rand(0..5)
 # Pick which continent to get aerial view of
 
 lat = 0 #North-South
@@ -50,9 +50,9 @@ else
 	lat = rand(-90.000000000...-70.000000000)
 	long = rand(-140.000000000...50.0)
 	message = message + " Antarctica"
-	# Get random latitude and longitude of somewhere in the world (including Antartica)
 	
-	# I made this case
+	# Get random latitude and longitude in Antarctica
+	# Having issues getting this case to work 100%, so I'm removing it for now
 end
 puts "#{lat} #{long}"
 puts continent
