@@ -43,7 +43,7 @@ elsif continent == 4
 	# Still isn't restricted to Asia 100% of time
 else
 	lat = rand(-38.643611...-18.6833)
-	long = rand(113.155...149.6389)
+	long = rand(113.155...151.277736)
 	message = message + " Australia"
 	# Get random latitude and longitude in Australia
 	
