@@ -3,9 +3,38 @@
 require 'rubygems'
 require 'chatterbot/dsl'
 require 'static_map'
+require 'twitter-text'
 
 # remove this to get less output when running your bot
 verbose
+  
+EMOJI = [
+    Twitter::Unicode::U1F3C6,
+    Twitter::Unicode::U1F4AF,
+    Twitter::Unicode::U1F386,
+    Twitter::Unicode::U1F387,
+    Twitter::Unicode::U1F638,
+    Twitter::Unicode::U1F38A,
+    Twitter::Unicode::U1F48E,
+    Twitter::Unicode::U1F380,
+    Twitter::Unicode::U1F525,
+    Twitter::Unicode::U2728,
+    Twitter::Unicode::U1F4A5,
+    Twitter::Unicode::U1F31F,
+    Twitter::Unicode::U1F4AB,
+    Twitter::Unicode::U1F680,
+    Twitter::Unicode::U2668,
+    Twitter::Unicode::U1F40C,
+    Twitter::Unicode::U1F409,
+    Twitter::Unicode::U1F432,
+    Twitter::Unicode::U2600,
+    Twitter::Unicode::U1F308,
+    Twitter::Unicode::U1F38A,
+    Twitter::Unicode::U1F47E,
+    Twitter::Unicode::U1F3B6,
+    Twitter::Unicode::U1F3AF,
+    Twitter::Unicode::U1F3C1
+  ]
   
 continent = rand(0..5)
 # Pick which continent to get aerial view of
@@ -16,34 +45,35 @@ message = "Somewhere near"
 # Initialize latitude and longitude
 
 if continent == 0
+
 	lat = rand(30.208889...50.0)
-	long = rand(-118.733056...-55.620833)
+	long = rand(-118.733056...-76.620833)
 	message = message + " North America"
 	# Get random latitude and longitude in North America
 elsif continent == 1
-	lat = rand(-53.896389...12.458611)
-	long = rand(-72.328611...-65.793056)
+	lat = rand(-13.896389...1.458611)
+	long = rand(-75.328611...-39.793056)
 	message = message + " South America"
 	# Get random latitude and longitude in South America
 elsif continent == 2
-	lat = rand(-32.981944...30.346983)
-	long = rand(10.4467...32.25)
+	lat = rand(-19.981944...21.346983)
+	long = rand(14.4467...34.25)
 	message = message + " Africa"
 	# Get random latitude and longitude in Africa
 elsif continent == 3
-	lat = rand(40.0042...54.133889)
-	long = rand(-8.500556...35.618056)
+	lat = rand(43.0042...48.0)
+	long = rand(2.500556...44.618056)
 	message = message + " Europe"
 	# Get random latitude and longitude in Europe
 elsif continent == 4
-	lat = rand(22.2661...60.7333)
-	long = rand(70.0...118.0)
+	lat = rand(21.2661...49.7333)
+	long = rand(70.0...106.0)
 	message = message + " Asia"
 	# Get random latitude and longitude in Asia
 	# Still isn't restricted to Asia 100% of time
 else
-	lat = rand(-38.643611...-18.6833)
-	long = rand(113.155...151.277736)
+	lat = rand(-31.643611...-20.6833)
+	long = rand(116.155...145.277736)
 	message = message + " Australia"
 	# Get random latitude and longitude in Australia
 	
@@ -73,7 +103,7 @@ image.save
 # save map to disk with path option
 
 search "a" do |tweet|
-	client.update_with_media message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s, File.open('./map.png'), in_reply_to_status_id:tweet.id
+	client.update_with_media message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s + "\n#{EMOJI.sample}#{EMOJI.sample}#{EMOJI.sample}", File.open('./map.png'), in_reply_to_status_id:tweet.id
 	exit
 	# Searches for a tweet that contains letter 'a' in order to send map tweet. Dumb way to trigger tweet event, will change.
 end
