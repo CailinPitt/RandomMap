@@ -2,35 +2,6 @@
 
 require 'rubygems'
 require 'static_map'
-require 'twitter-text'
-  
-EMOJI = [
-    Twitter::Unicode::U1F3C6,
-    Twitter::Unicode::U1F4AF,
-    Twitter::Unicode::U1F386,
-    Twitter::Unicode::U1F387,
-    Twitter::Unicode::U1F638,
-    Twitter::Unicode::U1F38A,
-    Twitter::Unicode::U1F48E,
-    Twitter::Unicode::U1F380,
-    Twitter::Unicode::U1F525,
-    Twitter::Unicode::U2728,
-    Twitter::Unicode::U1F4A5,
-    Twitter::Unicode::U1F31F,
-    Twitter::Unicode::U1F4AB,
-    Twitter::Unicode::U1F680,
-    Twitter::Unicode::U2668,
-    Twitter::Unicode::U1F40C,
-    Twitter::Unicode::U1F409,
-    Twitter::Unicode::U1F432,
-    Twitter::Unicode::U2600,
-    Twitter::Unicode::U1F308,
-    Twitter::Unicode::U1F38A,
-    Twitter::Unicode::U1F47E,
-    Twitter::Unicode::U1F3B6,
-    Twitter::Unicode::U1F3AF,
-    Twitter::Unicode::U1F3C1
-  ]
   
 continent = rand(0..5)
 # Pick which continent to get aerial view of
@@ -98,5 +69,5 @@ path: './map.png'
 image.save 
 # save map to disk with path option
 
-client.update_with_media message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s + "\n#{EMOJI.sample}#{EMOJI.sample}#{EMOJI.sample}", File.open('./map.png')
+client.update_with_media message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s, File.open('./map.png')
 
