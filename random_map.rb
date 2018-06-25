@@ -71,10 +71,10 @@ image.save
 # save map to disk with path option
 
 client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = ENV["consumer_key"]
-  config.consumer_secret     = ENV["consumer_secret"]
-  config.access_token        = ENV["access_token_key"]
-  config.access_token_secret = ENV["access_token_secret"]
+  config.consumer_key        = ENV["consumer_key_r"]
+  config.consumer_secret     = ENV["consumer_secret_r"]
+  config.access_token        = ENV["access_token_key_r"]
+  config.access_token_secret = ENV["access_token_secret_r"]
 end
 
 client.update_with_media message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s, File.open('./map.png')
