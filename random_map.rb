@@ -1,12 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'chatterbot/dsl'
 require 'static_map'
 require 'twitter-text'
-
-# remove this to get less output when running your bot
-verbose
   
 EMOJI = [
     Twitter::Unicode::U1F3C6,
@@ -102,8 +98,5 @@ path: './map.png'
 image.save 
 # save map to disk with path option
 
-search "a" do |tweet|
-	client.update_with_media message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s + "\n#{EMOJI.sample}#{EMOJI.sample}#{EMOJI.sample}", File.open('./map.png'), in_reply_to_status_id:tweet.id
-	exit
-	# Searches for a tweet that contains letter 'a' in order to send map tweet. Dumb way to trigger tweet event, will change.
-end
+client.update_with_media message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s + "\n#{EMOJI.sample}#{EMOJI.sample}#{EMOJI.sample}", File.open('./map.png')
+
