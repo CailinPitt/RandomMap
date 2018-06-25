@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'static_map'
+require 'twitter'
   
 continent = rand(0..5)
 # Pick which continent to get aerial view of
