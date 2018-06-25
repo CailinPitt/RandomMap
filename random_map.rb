@@ -79,5 +79,6 @@ end
 
 #client.update_with_media(message + "\nLatitude: " + lat.to_s + "\nLongitude: " + long.to_s, File.open('./map.png'))
 
-client.update_with_media(":)", lat: 37.7821120598956, long: -122.400612831116, display_coordinates: true, File.open('./map.png'))
+#client.update_with_media(":)", lat: 37.7821120598956, long: -122.400612831116, display_coordinates: true, File.open('./map.png'))
 
+client.update_with_media("I'm tweeting with @gem!", File.new("./map.png"))
