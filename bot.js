@@ -92,7 +92,7 @@ var client = new Twitter({
 var data1 = require('fs').readFileSync('satellite.png');
 var data2 = require('fs').readFileSync('road.png');
 
-//var images = data1 + ',' + data2;
+var images = data1 + ',' + data2;
 // Make post request on media endpoint. Pass file data as media parameter
 /*
 client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, response) {
@@ -104,7 +104,7 @@ client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, 
   */
 
 
-client.post('media/upload', {media: data1}, function(error, media, response) {
+client.post('media/upload', {media: images}, function(error, media, response) {
 
   if (!error) {
 
