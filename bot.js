@@ -4,13 +4,21 @@ const request = require('request')
 const randomFloat = require('random-float')
 var Twitter = require('twitter')
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomIntInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 var publicConfig = {
     key: 'AIzaSyAKfombgAtABCymfaO8G_ESr8OD4Txp1f4'
 };
 
-randomFloat(10, 100);
-
 var continent = getRandomInt(5);
+var zoom = getRandomIntInRange(13, 16);
+
 var message = "Somewhere near"
 var center;
 
@@ -40,11 +48,12 @@ switch(continent) {
       message = message + " Australia"
 }
 
+console.log(continent)
 var gmAPI = new GoogleMapsAPI(publicConfig);
 var paramsSatellite = {
     //center: '444 W Main St Lock Haven PA',
     center: center,
-    zoom: 13,
+    zoom: zoom,
     size: '2000x2000',
     maptype: 'satellite'
 };
@@ -52,7 +61,7 @@ var paramsSatellite = {
 var paramsRoad = {
     //center: '444 W Main St Lock Haven PA',
     center: center,
-    zoom: 13,
+    zoom: zoom,
     size: '2000x2000',
     maptype: 'roadmap'
 };
