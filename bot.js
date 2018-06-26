@@ -89,7 +89,7 @@ var client = new Twitter({
   });
 
   // Load your image
-var data1 = require('fs').readFileSync('satellite.png', { encoding: 'base64' });
+var data1 = require('fs').readFileSync('satellite.png');
 var data2 = require('fs').readFileSync('road.png');
 
 //var images = data1 + ',' + data2;
