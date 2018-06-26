@@ -3,6 +3,7 @@ const fs = require('fs')
 const request = require('request')
 const randomFloat = require('random-float')
 var Twitter = require('twitter')
+import mergeImg from 'merge-img'
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -105,7 +106,7 @@ client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, 
 
 
 client.post('media/upload', {media: images}, function(error, media, response) {
-
+console.log(error)
   if (!error) {
 
     // If successful, a media object will be returned.
