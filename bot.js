@@ -104,27 +104,37 @@ client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, 
 
   */
 
+mergeImg(['satellite.png', 'road.png'])
+  .then((img) => {
+    // Save image as file
+    img.write('out.png', () => console.log('done'));
+  var data = require('fs').readFileSync('out.png');
+  client.post('media/upload', {media: data}, function(error, media, response) {
+  console.log(error)
+    if (!error) {
 
-client.post('media/upload', {media: images}, function(error, media, response) {
-console.log(error)
-  if (!error) {
+      // If successful, a media object will be returned.
+      console.log(media);
 
-    // If successful, a media object will be returned.
-    console.log(media);
-
-    // Lets tweet it
-    var status = {
-      status: message,
-      media_ids: media.media_id_string // Pass the media id string
-    }
-
-    client.post('statuses/update', status, function(error, tweet, response) {
-      if (!error) {
-        console.log(tweet);
+      // Lets tweet it
+      var status = {
+        status: message,
+        media_ids: media.media_id_string // Pass the media id string
       }
-    });
+
+      client.post('statuses/update', status, function(error, tweet, response) {
+        if (!error) {
+          console.log(tweet);
+        }
+      });
 
   }
 });
+ 
+    // Get image as `Buffer`
+    //img.getBuffer(img.getMIME(), (buf) => console.log(buf));
+  });
+
+
 
 
