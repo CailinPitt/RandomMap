@@ -10,22 +10,41 @@ var publicConfig = {
 
 randomFloat(10, 100);
 
-var continent = 0//getRandomInt(5);
+var continent = getRandomInt(5);
+var message = "Somewhere near"
 var center;
 
 switch(continent) {
     case 0:
-        center = "" + randomFloat(30.208889, 50.0) + "," + randomFloat(-118.733056, -76.620833)
-        break;
+      center = "" + randomFloat(30.208889, 50.0) + "," + randomFloat(-118.733056, -76.620833)
+      message = message + " North America"
+      break;
+    case 1:
+      center = "" + randomFloat(-13.896389, 1.458611) + "," + randomFloat(-75.328611, -39.793056)
+      message = message + " South America"
+      break;
+    case 2:
+      center = "" + randomFloat(-19.981944, 21.346983) + "," + randomFloat(14.4467, 34.25)
+      message = message + " Africa"
+      break;
+    case 3:
+      center = "" + randomFloat(43.0042, 48.0) + "," + randomFloat(2.500556, 44.618056)
+      message = message + " Europe"
+      break;
+    case 4:
+      center = "" + randomFloat(21.2661, 49.7333) + "," + randomFloat(70.0, 106.0)
+      message = message + " Asia"
+      break;
     default:
-
+      center = "" + randomFloat(-31.643611, -20.6833) + "," + randomFloat(116.155, 145.277736)
+      message = message + " Australia"
 }
 
 var gmAPI = new GoogleMapsAPI(publicConfig);
 var paramsSatellite = {
     //center: '444 W Main St Lock Haven PA',
     center: center,
-    zoom: 15,
+    zoom: 13,
     size: '2000x2000',
     maptype: 'satellite'
 };
@@ -33,7 +52,7 @@ var paramsSatellite = {
 var paramsRoad = {
     //center: '444 W Main St Lock Haven PA',
     center: center,
-    zoom: 15,
+    zoom: 13,
     size: '2000x2000',
     maptype: 'roadmap'
 };
