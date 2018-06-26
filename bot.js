@@ -90,7 +90,7 @@ var client = new Twitter({
 
   // Load your image
 //var data1 = require('fs').readFileSync('satellite.png', { encoding: 'base64' });
-//var data2 = require('fs').readFileSync('road.png');
+var data2 = require('fs').readFileSync('road.png');
 
 //var images = data1 + ',' + data2;
 // Make post request on media endpoint. Pass file data as media parameter
@@ -103,8 +103,8 @@ client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, 
 
   */
 
-/*
-client.post('media/upload', {media: data1}, function(error, media, response) {
+
+client.post('media/upload', {media: data2}, function(error, media, response) {
 
   if (!error) {
 
@@ -126,4 +126,4 @@ client.post('media/upload', {media: data1}, function(error, media, response) {
   }
 });
 
-*/
+
