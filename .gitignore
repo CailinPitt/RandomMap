@@ -15,3 +15,5 @@
 
 #Ignore PNG files
 *.png
+
+node_modules/
