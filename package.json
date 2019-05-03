@@ -1,0 +1,29 @@
+{
+  "name": "randommap",
+  "version": "1.0.0",
+  "description": "Twitter bot that tweets random aerial images of the Earth @random_map",
+  "main": "app.js",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "googlemaps": "^1.12.0",
+    "node-emoji": "^1.10.0",
+    "random-float": "^1.0.0",
+    "request": "^2.87.0",
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "local": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CailinPitt/RandomMap.git"
+  },
+  "author": "Cailin Pitt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CailinPitt/RandomMap/issues"
+  },
+  "homepage": "https://github.com/CailinPitt/RandomMap#readme"
+}
