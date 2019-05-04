@@ -28,27 +28,27 @@ var center;
 
 switch(continent) {
     case 0:
-      center = "" + randomFloat(30.208889, 50.0) + "," + randomFloat(-118.733056, -76.620833)
+      center = "" + randomFloat(30.208889, 50.0) + ", " + randomFloat(-118.733056, -76.620833)
       message = message + " North America"
       break;
     case 1:
-      center = "" + randomFloat(-13.896389, 1.458611) + "," + randomFloat(-75.328611, -39.793056)
+      center = "" + randomFloat(-13.896389, 1.458611) + ", " + randomFloat(-75.328611, -39.793056)
       message = message + " South America"
       break;
     case 2:
-      center = "" + randomFloat(-19.981944, 21.346983) + "," + randomFloat(14.4467, 34.25)
+      center = "" + randomFloat(-19.981944, 21.346983) + ", " + randomFloat(14.4467, 34.25)
       message = message + " Africa"
       break;
     case 3:
-      center = "" + randomFloat(43.0042, 48.0) + "," + randomFloat(2.500556, 44.618056)
+      center = "" + randomFloat(43.0042, 48.0) + ", " + randomFloat(2.500556, 44.618056)
       message = message + " Europe"
       break;
     case 4:
-      center = "" + randomFloat(21.2661, 49.7333) + "," + randomFloat(70.0, 106.0)
+      center = "" + randomFloat(21.2661, 49.7333) + ", " + randomFloat(70.0, 106.0)
       message = message + " Asia"
       break;
     default:
-      center = "" + randomFloat(-31.643611, -20.6833) + "," + randomFloat(116.155, 145.277736)
+      center = "" + randomFloat(-31.643611, -20.6833) + ", " + randomFloat(116.155, 145.277736)
       message = message + " Australia"
 }
 
@@ -71,6 +71,14 @@ var paramsRoad = {
     scale: 2
 };
 
+var paramsTerrain = {
+  center: center,
+  zoom: zoom,
+  size: '2000x2000',
+  maptype: 'terrain',
+  scale: 2
+};
+
 var imageSatellite = gmAPI.staticMap(paramsSatellite);
 
 var streamSatellite = request(imageSatellite).pipe(fs.createWriteStream('satellite.png'));
@@ -81,36 +89,57 @@ streamSatellite.on('finish', function() {
   var streamRoad = request(imageRoad).pipe(fs.createWriteStream('road.png'));
   
   streamRoad.on('finish', function() {
-    var satellite = fs.readFileSync('satellite.png', { encoding: 'base64' });
-    var road = fs.readFileSync('road.png', { encoding: 'base64' });
+
+    var imageTerrain = gmAPI.staticMap(paramsTerrain);
+
+    var streamTerrain = request(imageTerrain).pipe(fs.createWriteStream('terrain.png'));
     
-    T.post('media/upload', { media_data: satellite }, function (err, data, response) {
-      // now we can assign alt text to the media, for use by screen readers and
-      // other text-based presentations and interpreters
-      var mediaIdSatellite = data.media_id_string
-      var satelliteAltText = "Satellite"
-      var meta_params = { media_id: mediaIdSatellite, alt_text: { text: satelliteAltText } }
+    streamTerrain.on('finish', function() {
+      var satellite = fs.readFileSync('satellite.png', { encoding: 'base64' });
+      var road = fs.readFileSync('road.png', { encoding: 'base64' });
+      var terrain = fs.readFileSync('terrain.png', { encoding: 'base64' });
     
-      T.post('media/metadata/create', meta_params, function (err, data, response) {
-        if (!err) {
-          T.post('media/upload', { media_data: road }, function (err, data, response) {
-            // now we can assign alt text to the media, for use by screen readers and
-            // other text-based presentations and interpreters
-            var mediaIdRoad = data.media_id_string
-            var roadAltText = "Road"
-            meta_params = { media_id: mediaIdRoad, alt_text: { text: roadAltText } }
-          
-            T.post('media/metadata/create', meta_params, function (err, data, response) {
-              if (!err) {
-                // now we can reference the media and post a tweet (media will attach to the tweet)
-                var params = { status: message, media_ids: [mediaIdSatellite, mediaIdRoad] }
-          
-                T.post('statuses/update', params, function (err, data, response) {
-                })
-              }
+      T.post('media/upload', { media_data: satellite }, function (err, data, response) {
+        // now we can assign alt text to the media, for use by screen readers and
+        // other text-based presentations and interpreters
+        var mediaIdSatellite = data.media_id_string
+        var satelliteAltText = "Satellite"
+        var meta_params = { media_id: mediaIdSatellite, alt_text: { text: satelliteAltText } }
+      
+        T.post('media/metadata/create', meta_params, function (err, data, response) {
+          if (!err) {
+            T.post('media/upload', { media_data: road }, function (err, data, response) {
+              // now we can assign alt text to the media, for use by screen readers and
+              // other text-based presentations and interpreters
+              var mediaIdRoad = data.media_id_string
+              var roadAltText = "Road"
+              meta_params = { media_id: mediaIdRoad, alt_text: { text: roadAltText } }
+            
+              T.post('media/metadata/create', meta_params, function (err, data, response) {
+                if (!err) {
+
+                  T.post('media/upload', { media_data: terrain }, function (err, data, response) {
+                    // now we can assign alt text to the media, for use by screen readers and
+                    // other text-based presentations and interpreters
+                    var mediaIdTerrain = data.media_id_string
+                    var terrainAltText = "Terrain"
+                    meta_params = { media_id: mediaIdTerrain, alt_text: { text: terrainAltText } }
+                  
+                    T.post('media/metadata/create', meta_params, function (err, data, response) {
+                      if (!err) {
+                        // now we can reference the media and post a tweet (media will attach to the tweet)
+                        var params = { status: message, media_ids: [mediaIdSatellite, mediaIdRoad, mediaIdTerrain] }
+                  
+                        T.post('statuses/update', params, function (err, data, response) {
+                        })
+                      }
+                    })
+                  })
+                }
+              })
             })
-          })
-        }
+          }
+        })
       })
     })
   });
