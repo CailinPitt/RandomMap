@@ -16,16 +16,12 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-function getRandomIntInRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 var publicConfig = {
     key: 'AIzaSyAKfombgAtABCymfaO8G_ESr8OD4Txp1f4'
 };
 
 var continent = getRandomInt(5);
-var zoom = getRandomIntInRange(13, 16);
+var zoom = 10;
 
 var message = "Somewhere near"
 var center;
@@ -63,14 +59,16 @@ var paramsSatellite = {
     center: center,
     zoom: zoom,
     size: '2000x2000',
-    maptype: 'satellite'
+    maptype: 'satellite',
+    scale: 2
 };
 
 var paramsRoad = {
     center: center,
     zoom: zoom,
     size: '2000x2000',
-    maptype: 'roadmap'
+    maptype: 'roadmap',
+    scale: 2
 };
 
 var imageSatellite = gmAPI.staticMap(paramsSatellite);
