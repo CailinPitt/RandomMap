@@ -17,3 +17,7 @@
 *.png
 
 node_modules/
+
+*.icloud
+
+*.DS_Store
