@@ -27,7 +27,7 @@ var publicConfig = {
 var continent = getRandomInt(5);
 var zoom = getRandomIntInRange(11, 15);
 
-var message = "Somewhere near"
+var message = "Somewhere in"
 var center;
 
 switch(continent) {
