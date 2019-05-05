@@ -16,12 +16,16 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+function getRandomIntInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 var publicConfig = {
     key: 'AIzaSyAKfombgAtABCymfaO8G_ESr8OD4Txp1f4'
 };
 
 var continent = getRandomInt(5);
-var zoom = 10;
+var zoom = getRandomIntInRange(10, 13);
 
 var message = "Somewhere near"
 var center;
