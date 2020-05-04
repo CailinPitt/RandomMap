@@ -61,10 +61,10 @@ const chooseContinent = () => {
     };
 }
 
-const downloadMap = async (center, maptype, imagePath) => {
+const downloadMap = async (center, maptype, zoom, imagePath) => {
   const imageParams = {
     center,
-    zoom: getRandomIntInRange(11, 15),
+    zoom,
     maptype,
     size: '2000x2000',
     scale: 2,
@@ -109,9 +109,10 @@ const run = async () => {
   fs.ensureDirSync(assetDirectory);
 
   const imageInfo = chooseContinent();
+  const zoom = getRandomIntInRange(11, 15);
 
-  await downloadMap(imageInfo.center, 'satellite', assetDirectory + 'satellite.png');
-  await downloadMap(imageInfo.center, 'terrain', assetDirectory + 'terrain.png');
+  await downloadMap(imageInfo.center, 'satellite', zoom, assetDirectory + 'satellite.png');
+  await downloadMap(imageInfo.center, 'terrain', zoom, assetDirectory + 'terrain.png');
 
   tweet(imageInfo.status);
 
